@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="styles/style2.css">
+</head>
+<body>
+<h2>User information</h2>
+<div class="table">
+  <div class="row">
+    <div class="cell">First name</div>
+    <div class="cell">
+      <form id="userForm">
+        <input type="text" id="fname" name="fname" value=""><br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="cell">Last name</div>
+    <div class="cell">
+      <input type="text" id="lname" name="lname" value=""><br><br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="cell">Age</div>
+    <div class="cell">
+      <select id="age" name="age">
+        <option value="0-18">0-18</option>
+        <option value="19-40">19-40</option>
+        <option value="41-60">41-60</option>
+        <option value="61+">61+</option>
+      </select><br><br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="cell">Sex</div>
+    <div class="cell">
+      <input type="radio" id="male" name="sex" value="Male">
+      <label for="male">Male</label><br>
+      <input type="radio" id="female" name="sex" value="Female">
+      <label for="female">Female</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="cell">Hobbies</div>
+    <div class="cell">
+      <input type="checkbox" id="hobby1" name="hobby" value="Sports">
+      <label for="hobby1">Sports</label><br>
+      <input type="checkbox" id="hobby2" name="hobby" value="Music">
+      <label for="hobby2">Music</label><br>
+      <input type="checkbox" id="hobby3" name="hobby" value="Cooking">
+      <label for="hobby3">Cooking</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="cell"><button type="button" onclick="displayUserData()">OK</button></div>
+    <div class="cell"><button type="reset">Cancel</button></form></div>
+  </div>
+</div>
+
+<script>
+function displayUserData() {
+  var firstName = document.getElementById("fname").value;
+  var lastName = document.getElementById("lname").value;
+  var age = document.getElementById("age").value;
+  var sex = document.querySelector('input[name="sex"]:checked').value;
+  var hobbies = [];
+  var checkboxes = document.querySelectorAll('input[name="hobby"]:checked');
+  checkboxes.forEach(function(checkbox) {
+    hobbies.push(checkbox.value);
+  });
+
+  var userData = "First name: " + firstName + "\n" +
+                 "Last name: " + lastName + "\n" +
+                 "Age: " + age + "\n" +
+                 "Sex: " + sex + "\n" +
+                 "Hobbies: " + hobbies.join(", ");
+
+  alert(userData);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+.table {
+  display: table;
+  width: 500px;
+  border-collapse: collapse;
+}
+
+.row {
+  display: table-row;
+}
+
+.cell {
+  display: table-cell;
+  padding: 5px 10px;
+  border: 2px solid #ddd;
+}
+
+.cell:first-child {
+  font-weight: bold;
+}
+
+input[type="text"],
+select,
+input[type="checkbox"],
+input[type="radio"],
+button {
+  margin-bottom: 5px;
+}

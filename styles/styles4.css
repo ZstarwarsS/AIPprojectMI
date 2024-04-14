@@ -1,0 +1,127 @@
+/* Common styles for menu */
+.menu {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.menu a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #596069;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+.menu a:hover {
+      background-color: #131414;
+    }
+/* Styles for desktop layout */
+@media (min-width: 768px) {
+  .wrapper {
+    display: flex;
+  }
+  .menu {
+    flex: 1;
+  }
+  .description {
+    flex: 2;
+  }
+  .content {
+    flex: 3;
+  }
+}
+
+/* Styles for smartphone layout */
+@media (max-width: 767px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .menu {
+    order: 1;
+  }
+  .description {
+    order: 2;
+  }
+  .content {
+    order: 3;
+  }
+}
+
+/* Styles for Page 1 */
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+/* Styles for Page 2 */
+.table {
+  display: table;
+  width: 50;
+  border-collapse: collapse;
+}
+
+.row {
+  display: table-row;
+}
+
+.cell {
+  display: table-cell;
+  padding: 5px 10px;
+  border: 2px solid #ddd;
+}
+
+.cell:first-child {
+  font-weight: bold;
+}
+
+input[type="text"],
+select,
+input[type="checkbox"],
+input[type="radio"],
+button {
+  margin-bottom: 5px;
+}
+
+/* Additional styles for enhanced appearance */
+body {
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+.wrapper {
+  margin: 20px auto;
+  max-width: 1200px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  overflow: hidden;
+  height: 600px; /* Set a fixed height */
+}
+
+.menu {
+  background-color: #444;
+}
+
+.menu a {
+  color: #fff;
+}
+
+.description {
+  background-color: #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.content {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 5px;
+  overflow-y: auto; /* Add this to enable scrolling if content exceeds height */
+}
+

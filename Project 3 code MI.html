@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Algorithms with User Input</title>
+</head>
+<body>
+
+<script>
+  // Function to generate a random list of numbers
+  function generateRandomList(length, min, max) {
+    let list = [];
+    for (let i = 0; i < length; i++) {
+      list.push(Math.floor(Math.random() * (max - min + 1)) + min);
+    }
+    return list;
+  }
+
+  // Function to perform Bubble Sort
+  function bubbleSort(arr) {
+    let startTime = performance.now();
+    let len = arr.length;
+    for (let i = 0; i < len; i++) {
+      for (let j = 0; j < len - i - 1; j++) {
+        if (arr[j] > arr[j + 1]) {
+          // Swap
+          let temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+        }
+      }
+    }
+    let endTime = performance.now();
+    let executionTime = endTime - startTime;
+    document.getElementById('bubbleSortTime').textContent = "Bubble Sort execution time: " + executionTime + " milliseconds";
+    return arr;
+  }
+
+  // Function to perform Selection Sort
+  function selectionSort(arr) {
+    let startTime = performance.now();
+    let len = arr.length;
+    for (let i = 0; i < len - 1; i++) {
+      let minIndex = i;
+      for (let j = i + 1; j < len; j++) {
+        if (arr[j] < arr[minIndex]) {
+          minIndex = j;
+        }
+      }
+      if (minIndex !== i) {
+        // Swap
+        let temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+      }
+    }
+    let endTime = performance.now();
+    let executionTime = endTime - startTime;
+    document.getElementById('selectionSortTime').textContent = "Selection Sort execution time: " + executionTime + " milliseconds";
+    return arr;
+  }
+
+  // Function to display only the first 5 and last 5 numbers of an array
+  function displayFirstAndLast(arr) {
+    let displayArr = arr.slice(0, 5).concat(["(...)"]).concat(arr.slice(-5));
+    return displayArr;
+  }
+
+    // Function to handle form submission
+  function handleSubmit(event) {
+    event.preventDefault();
+    const amount = parseInt(document.getElementById("amount").value);
+    const min = parseInt(document.getElementById("min").value);
+    const max = parseInt(document.getElementById("max").value);
+    if (isNaN(amount) || amount <= 0 || isNaN(min) || isNaN(max) || min >= max) {
+      alert("Please enter valid values. Amount should be a positive number, and min should be less than max.");
+      return;
+    }
+    let randomList = generateRandomList(amount, min, max);
+    let output = "<p>Random list: " + displayFirstAndLast(randomList) + "</p>";
+
+    // Bubble Sort
+    let sortedListBubble = bubbleSort([...randomList]);
+    output += "<p>Sorted list using Bubble Sort: " + displayFirstAndLast(sortedListBubble) + "</p>";
+
+    // Selection Sort
+    let sortedListSelection = selectionSort([...randomList]);
+    output += "<p>Sorted list using Selection Sort: " + displayFirstAndLast(sortedListSelection) + "</p>";
+    
+    document.getElementById("results").innerHTML = output;
+  }
+</script>
+
+<form onsubmit="handleSubmit(event)">
+  <label for="amount">Enter the amount of numbers to generate:</label>
+  <input type="number" id="amount" name="amount" required>
+  <br>
+  <label for="min">Enter the minimum value:</label>
+  <input type="number" id="min" name="min" required>
+  <br>
+  <label for="max">Enter the maximum value:</label>
+  <input type="number" id="max" name="max" required>
+  <br>
+  <button type="submit">Generate and Sort</button>
+</form>
+
+<div id="results"></div>
+<p id="bubbleSortTime"></p>
+<p id="selectionSortTime"></p>
+
+</body>
+</html>

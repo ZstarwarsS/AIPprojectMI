@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Page with AJAX</title>
+  <link rel="stylesheet" type="text/css" href="styles/styles4.css">
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="menu">
+    <a href="#" class="page-link" data-page="1">Project 1</a>
+    <a href="#" class="page-link" data-page="2">Project 2</a>
+    <a href="#" class="page-link" data-page="3">Project 3</a>
+  </div>
+  <div class="description" id="description">
+    Please select a page to view its description.
+  </div>
+  <div class="content" id="content">
+    <!-- Content of the selected page will be loaded here dynamically -->
+  </div>
+</div>
+
+<script>
+  // Map of project numbers to descriptions
+  var projectDescriptions = {
+    '1': 'Project 1: Tables and input manipulation using JavaScript',
+    '2': 'Project 2: Styling a table using CSS and use of Tableless Tables',
+    '3': 'Project 3: Sorting using JavaScript'
+  };
+
+  document.querySelectorAll('.page-link').forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      var pageNumber = this.getAttribute('data-page');
+      fetchContent(pageNumber);
+    });
+  });
+
+  function fetchContent(pageNumber) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          updateContent(xhr.responseText, pageNumber);
+        } else {
+          console.error('Error fetching content: ' + xhr.status);
+        }
+      }
+    };
+    xhr.open('GET', 'Project ' + pageNumber + ' code MI.html', true);
+    xhr.send();
+  }
+
+  function updateContent(content, pageNumber) {
+    var description = projectDescriptions[pageNumber];
+    document.getElementById('description').innerHTML = description;
+    document.getElementById('content').innerHTML = content;
+
+    // Manually execute scripts within the loaded content
+    var scripts = document.getElementById('content').getElementsByTagName('script');
+    for (var i = 0; i < scripts.length; i++) {
+        var script = scripts[i];
+        var scriptSrc = script.getAttribute('src');
+        if (scriptSrc) {
+            // If the script has a src attribute, load it dynamically
+            var newScript = document.createElement('script');
+            newScript.src = scriptSrc;
+            document.head.appendChild(newScript);
+        } else {
+            // If the script is inline, clone and append it
+            var newScript = document.createElement('script');
+            newScript.text = script.text;
+            document.head.appendChild(newScript);
+        }
+    }
+}
+
+
+</script>
+
+</body>
+</html>
