@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Examples</title>
+<style>
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+    section {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+    }
+    h2 {
+        margin-top: 0;
+    }
+    .dataTable {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .dataTable th, .dataTable td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    .dataTable th {
+        background-color: #f2f2f2;
+    }
+	
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+
+<header>
+    <h2>JSON Examples</h2>
+</header>
+
+<section id="example1">
+    <h2>Example 1:</h2>
+	<button id="toggle-example1">Toggle Example 1</button>
+    <div class="exercise-content">
+        <ul>
+            <li><strong>Name:</strong> <span id="name"></span></li>
+            <li><strong>Age:</strong> <span id="age"></span></li>
+            <li><strong>City:</strong> <span id="city"></span></li>
+            <li><strong>Employees:</strong>
+                <ul id="employees"></ul>
+            </li>
+            <li><strong>Sale:</strong> <span id="sale"></span></li>
+            <li><strong>Middle Name:</strong> <span id="middlename"></span></li>
+        </ul>
+    </div>
+</section>
+
+<section id="example2">
+    <h2>Example 2:</h2>
+	<button id="toggle-example2">Toggle Example 2</button>
+    <div class="exercise-content" id="example2-output"></div>
+</section>
+
+<section id="example4">
+    <h2>Example 4:</h2>
+	<button id="toggle-example4">Toggle Example 4</button>
+    <div class="exercise-content" id="example4-output"></div>
+</section>
+
+<section id="example6">
+    <h2>Example 6:</h2>
+	<button id="toggle-example6">Toggle Example 6</button>
+    <div class="exercise-content" id="example6-output"></div>
+</section>
+
+<!-- Buttons for toggling each section -->
+
+
+
+
+
+<script>
+    loadjson();
+    
+    function loadjson() {
+        // Example 1
+            const data1 = {"name":"John"};
+            const data2 = {"age":30};
+            const data3 = {"employee":{"name":"John","age":30,"city":"New York"}};
+            const data4 = {"employees":["John","Anna","Peter"]};
+            const data5 = {"sale":true};
+            const data6 = {"middlename":null};
+
+            // Update HTML with JSON data
+            document.getElementById("name").textContent = data1.name;
+            document.getElementById("age").textContent = data2.age;
+            document.getElementById("city").textContent = data3.employee.city;
+            data4.employees.forEach(employee => {
+                const li = document.createElement("li");
+                li.textContent = employee;
+                document.getElementById("employees").appendChild(li);
+            });
+            document.getElementById("sale").textContent = data5.sale;
+            document.getElementById("middlename").textContent = data6.middlename;
+
+        // Example 2
+        var example2 = [
+            { "color": "red", "value": "#f00" },
+            { "color": "green", "value": "#0f0" },
+            { "color": "blue", "value": "#00f" },
+            { "color": "cyan", "value": "#0ff" },
+            { "color": "magenta", "value": "#f0f" },
+            { "color": "yellow", "value": "#ff0" },
+            { "color": "black", "value": "#000" }
+        ];
+
+        var example2_output = '';
+        example2.forEach(function(item) {
+            example2_output += item.color + '(' + item.value + ') ';
+        });
+
+        $('#example2-output').html('Values from array: ' + example2_output);
+
+        // Example 4
+        var example4 = {
+            "id": "0001",
+            "type": "donut",
+            "name": "Cake",
+            "ppu": 0.55,
+            "batters": {
+                "batter": [
+                    { "id": "1001", "type": "Regular" },
+                    { "id": "1002", "type": "Chocolate" },
+                    { "id": "1003", "type": "Blueberry" },
+                    { "id": "1004", "type": "Devil's Food" }
+                ]
+            },
+            "topping": [
+                { "id": "5001", "type": "None" },
+                { "id": "5002", "type": "Glazed" },
+                { "id": "5005", "type": "Sugar" },
+                { "id": "5007", "type": "Powdered Sugar" },
+                { "id": "5006", "type": "Chocolate with Sprinkles" },
+                { "id": "5003", "type": "Chocolate" },
+                { "id": "5004", "type": "Maple" }
+            ]
+        };
+
+        var example4_output = '<p>Batters:</p><ul>';
+        example4.batters.batter.forEach(function(item) {
+            example4_output += '<li>' + item.type + ' (' + item.id + ')</li>';
+        });
+        example4_output += '</ul>';
+
+        $('#example4-output').html(example4_output);
+
+        // Example 6
+        var example6 = {
+            "id": "0001",
+            "type": "donut",
+            "name": "Cake",
+            "image": {
+                "url": "images/0001.jpg",
+                "width": 200,
+                "height": 200
+            },
+            "thumbnail": {
+                "url": "images/thumbnails/0001.jpg",
+                "width": 32,
+                "height": 32
+            }
+        };
+
+        var example6_output = '<table class="dataTable">';
+        example6_output += '<tr><th>id</th><th>type</th><th>name</th><th>image.width</th><th>image.height</th><th>image.url</th></tr>';
+        example6_output += '<tr><td>' + example6.id + '</td><td>' + example6.type + '</td><td>' + example6.name + '</td><td>' + example6.image.width + '</td><td>' + example6.image.height + '</td><td>' + example6.image.url + '</td></tr>';
+        example6_output += '</table>';
+
+        $('#example6-output').html(example6_output);
+    }
+</script>
+
+</body>
+</html>
