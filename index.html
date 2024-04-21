@@ -133,13 +133,26 @@
         }
 
         $( function() {
-            $( "#datepicker" ).datepicker();
+            $( "#datepicker" ).datepicker({
+					dateFormat: "yy-mm-dd", // Set the date format
+					autoFocus: true, // Disable autocomplete
+					onSelect: function(date) {
+					  // When a date is selected, display some information related to that date
+					  displayDateInfo("You selected: " + date);
+					  // You can add more functionality here, like fetching data related to the selected date from a server
+					}
+				});
         } );
+		
+		function displayDateInfo(info) {
+				jQuery("#date-info").html(info);
+		}
     </script>
 </head>
 <body>
     <h1>Smooth navigational menu with jQuery (Projects 5 and 7)</h1>
     <p>Date: <input type="text" id="datepicker"></p>
+	<div id="date-info"></div>
     <div id="smoothmenu1" class="ddsmoothmenu">
         <ul>
             <li><a href="#" class="page-link2" data-page="1" data-description="Project 1 Tables and input manipulation using JavaScript">Project 1</a></li>
