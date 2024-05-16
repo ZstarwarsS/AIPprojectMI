@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Country</th>
+    <th>Capacity (MW)</th>
+    <th>Type</th>
+    <th>Image</th>
+  </tr>
+  <tr ng-repeat="station in powerStations">
+    <td>{{station.name}}</td>
+    <td>{{station.country}}</td>
+    <td>{{station.capacity | number}}</td>
+    <td>{{station.type}}</td>
+    <td><img ng-src="{{station.imageURL}}" width="100"></td>
+  </tr>
+</table>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html ng-app="combinedApp">
+<head>
+  <meta charset="utf-8">
+  <title>Angular.js Combined Examples</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .menu {
+      padding: 0;
+      list-style: none;
+      background: #eee;
+      margin-bottom: 20px;
+    }
+    .menu li {
+      display: inline;
+      margin-right: 10px;
+    }
+    .menu li a {
+      text-decoration: none;
+      padding: 10px;
+      background: #ddd;
+      border-radius: 5px;
+    }
+    .menu li a.active {
+      background: #bbb;
+    }
+  </style>
+  <script>
+    var combinedApp = angular.module('combinedApp', ['ngRoute']);
+
+    combinedApp.config(function($routeProvider) {
+      $routeProvider
+        .when('/', {
+          template: '<h1>Welcome to AngularJS Examples</h1><p>Select an example from the menu to view it.</p>'
+        })
+        .when('/example32', {
+          templateUrl: 'example32.html',
+          controller: 'Example32Ctrl'
+        })
+        .when('/example34', {
+          templateUrl: 'example34.html',
+          controller: 'Example34Ctrl'
+        })
+        .when('/example36', {
+          templateUrl: 'example36.html',
+          controller: 'Example36Ctrl'
+        })
+        .when('/example36/:stationName', {
+          templateUrl: 'power-station-detail.html',
+          controller: 'Example36DetailCtrl'
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+    });
+
+    combinedApp.controller('Example32Ctrl', function ($scope, $http){
+      $http.get('power_stations.json').success(function(data) {
+        $scope.powerStations = data;
+      });
+    });
+
+    combinedApp.controller('Example34Ctrl', function ($scope, $http){
+      $http.get('power_stations.json').success(function(data) {
+        $scope.powerStations = data;
+      });
+    });
+
+    combinedApp.controller('Example36Ctrl', function ($scope, $http){
+      $http.get('power_stations.json').success(function(data) {
+        $scope.powerStations = data;
+      });
+    });
+
+    combinedApp.controller('Example36DetailCtrl', function ($scope, $routeParams){
+      $scope.name = $routeParams.stationName;
+    });
+
+    combinedApp.controller('MenuCtrl', function($scope, $location) {
+      $scope.isActive = function(viewLocation) {
+        return viewLocation === $location.path();
+      };
+    });
+  </script>
+</head>
+<body>
+  <ul class="menu" ng-controller="MenuCtrl">
+    <li><a href="#/" ng-class="{active: isActive('/')}">Home</a></li>
+    <li><a href="#/example32" ng-class="{active: isActive('/example32')}">Example 32</a></li>
+    <li><a href="#/example34" ng-class="{active: isActive('/example34')}">Example 34</a></li>
+    <li><a href="#/example36" ng-class="{active: isActive('/example36')}">Example 36</a></li>
+  </ul>
+  <div ng-view></div>
+</body>
+</html>
