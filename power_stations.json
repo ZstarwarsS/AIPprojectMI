@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Three Gorges Dam",
+    "country": "China",
+    "capacity": 22500,
+    "type": "Hydroelectric",
+    "imageURL": "//upload.wikimedia.org/wikipedia/commons/thumb/a/ab/ThreeGorgesDam-China2009.jpg/1920px-ThreeGorgesDam-China2009.jpg"
+  },
+  {
+    "name": "Itaipu Dam",
+    "country": "Brazil/Paraguay",
+    "capacity": 14000,
+    "type": "Hydroelectric",
+    "imageURL": "//upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Itaipu_geral.jpg/1920px-Itaipu_geral.jpg"
+  },
+  {
+    "name": "Xiluodu Dam",
+    "country": "China",
+    "capacity": 13860,
+    "type": "Hydroelectric",
+    "imageURL": "//upload.wikimedia.org/wikipedia/commons/thumb/1/19/%E6%BA%AA%E6%B4%9B%E6%B8%A1%E6%B0%B4%E7%94%B5%E7%AB%992011%E4%B8%8A%E6%B8%B8%E9%B8%9F%E7%9E%B0.jpg/1280px-%E6%BA%AA%E6%B4%9B%E6%B8%A1%E6%B0%B4%E7%94%B5%E7%AB%992011%E4%B8%8A%E6%B8%B8%E9%B8%9F%E7%9E%B0.jpg"
+  }
+]
